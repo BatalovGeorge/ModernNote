@@ -30,26 +30,10 @@ namespace ModernNote
         }
         public string Print()
         {
-            return $"Должность: {Id} Зарплата: {Name} Имя: {City}";
+            return $"Номер: {Id};Имя: {Name};Город: {City};Дата: {Date.ToShortDateString()};";
         }
 
-        public string WorkerData()
-        {
-            var human = new Worker(1, "Ivan", "Moscow");
-            string s1 = human.Print();
-            return s1;
-        }
 
-        public string[] StrWrite()
-        {
-            string[] spl = WorkerData().Split(' ');
-            StreamWriter sW = new StreamWriter("workerData.txt");
-            foreach(var e in spl)
-            {
-                sW.WriteLine(e+"dasdas");
-            }
-            return spl;
-        }
 
         public string Name { get => name; set => name = value; }
         public string City { get => city; set => city = value; }

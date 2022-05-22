@@ -11,9 +11,9 @@ namespace ModernNote
 
         public static void Main(string[] args)
         {
-            Worker work1 = new Worker();
+            WorkerManipulation work1 = new WorkerManipulation();
 
-                Console.WriteLine(work1.StrWrite());
+                Console.WriteLine("ID is " + work1.IDNum());
 
         }
     }
