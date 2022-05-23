@@ -13,8 +13,8 @@ namespace ModernNote
         {
             WorkerManipulation work1 = new WorkerManipulation();
 
-                Console.WriteLine("ID is " + work1.IDNum());
-
+                Console.WriteLine(work1.StrWrite());
+                Console.WriteLine(work1.ShowData());
         }
     }
 }
