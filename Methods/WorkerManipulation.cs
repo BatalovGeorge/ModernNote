@@ -11,8 +11,7 @@ namespace ModernNote
         public string WorkerData()
         {
             var human = new Worker(IDNum(),Console.ReadLine(),Console.ReadLine());
-            string s1 = human.Print();
-            return s1;
+            return human.Print();
         }
         public int IDNum()
         {
@@ -43,5 +42,24 @@ namespace ModernNote
                 return sR.ReadToEnd();
             }
         }
+
+        public string DeleteWorker()
+        {
+            string data = ShowData();
+            string deleteNum = "3";
+            if (data.Contains($"Номер: {deleteNum}"))
+            {
+                int num = Convert.ToInt32(deleteNum);
+                string[] splt = data.Split(";");
+                splt[num] = "deleted";
+                StreamWriter streamWriter = new StreamWriter("workerData.txt", true);
+                streamWriter.WriteLine();
+                streamWriter.Close();
+
+
+            }
+                return data;
+        }
+
     }
 }

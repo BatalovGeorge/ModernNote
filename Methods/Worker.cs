@@ -9,9 +9,13 @@ namespace ModernNote
     public struct Worker
     {
         private int id;
-        private string name;
-        private string city;
+        private string name, city;
         private DateTime date;
+
+        public string Name { get => name; set => name = value; }
+        public string City { get => city; set => city = value; }
+        public DateTime Date { get => date; set => date = DateTime.Now; }
+        public int Id { get => id; set => id = value; }
 
         public Worker(int id, string Name, string City)
         {
@@ -30,14 +34,9 @@ namespace ModernNote
         }
         public string Print()
         {
-            return $"Номер: {Id};Имя: {Name};Город: {City};Дата: {Date.ToShortDateString()};";
+            return $"Номер: {Id};Имя: {Name};Город: {City};Дата: {Date.ToShortDateString()};" ;
         }
 
 
-
-        public string Name { get => name; set => name = value; }
-        public string City { get => city; set => city = value; }
-        public DateTime Date { get => date; set => date = DateTime.Now; }
-        public int Id { get => id; set => id = value; }
     }
 }

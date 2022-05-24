@@ -13,8 +13,9 @@ namespace ModernNote
         {
             WorkerManipulation work1 = new WorkerManipulation();
 
-                Console.WriteLine(work1.StrWrite());
-                Console.WriteLine(work1.ShowData());
+/*            Console.WriteLine(work1.StrWrite());
+            Console.WriteLine(work1.ShowData());*/
+            Console.WriteLine(work1.DeleteWorker());
         }
     }
 }
