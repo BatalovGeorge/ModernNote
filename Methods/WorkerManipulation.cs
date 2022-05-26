@@ -8,57 +8,50 @@ namespace ModernNote
 {
     public struct WorkerManipulation
     {
-        public string WorkerData()
+        private string path;
+        public string SetPath { set { path = value; } }
+        public string GetPath { get { return path; } }
+        public bool FileExist()
         {
-            var human = new Worker(IDNum(),Console.ReadLine(),Console.ReadLine());
-            return human.Print();
+            Console.WriteLine("Введите имя файла: ");
+            SetPath = Console.ReadLine();
+            bool exist = File.Exists($@"{GetPath}.txt") ? true : false;
+           
+            return exist;
         }
-        public int IDNum()
-        {
-            string text = String.Empty;
-            using (StreamReader sR = new StreamReader("workerData.txt"))
-            {
-                text = sR.ReadToEnd();
-            }
-            string[] splitNum = text.Split("Номер:");
-            int id = splitNum.Length;
 
-            return id;
-        }
-        public string[] StrWrite()
+        public void RecordInFileData(int id)
         {
-            string[] spl = WorkerData().Split(';');
-            using (StreamWriter sW = new StreamWriter("workerData.txt", true))
-                foreach (var e in spl)
+            using (StreamWriter sW = new StreamWriter(GetPath,true))
+            {
+                char key = 'д';
+
+                do
                 {
-                    sW.WriteLine(e);
-                }
-            return spl;
-        }
-        public string ShowData()
-        {
-            using (StreamReader sR = new StreamReader("workerData.txt"))
-            {
-                return sR.ReadToEnd();
+                    Console.WriteLine("Введите Имя :");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Введите Город :");
+                    string city = Console.ReadLine();
+
+                    var worker = new Worker(id, name, city);
+
+                    sW.WriteLine(worker.Print());
+
+                    Console.WriteLine("Продолжить д/н");
+                    key = Console.ReadKey(true).KeyChar;
+                } while (char.ToLower(key) == 'д');
             }
         }
 
-        public string DeleteWorker()
+        public string CheckFile()
         {
-            string data = ShowData();
-            string deleteNum = "3";
-            if (data.Contains($"Номер: {deleteNum}"))
+            int n = 0;
+            if (FileExist()==true)
             {
-                int num = Convert.ToInt32(deleteNum);
-                string[] splt = data.Split(";");
-                splt[num] = "deleted";
-                StreamWriter streamWriter = new StreamWriter("workerData.txt", true);
-                streamWriter.WriteLine();
-                streamWriter.Close();
-
-
+                RecordInFileData(n);
             }
-                return data;
+            else { File.Create($@"{GetPath}.txt"); RecordInFileData(n+999); }
+            return null;
         }
 
     }
