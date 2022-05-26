@@ -13,9 +13,12 @@ namespace ModernNote
         {
             WorkerManipulation work1 = new WorkerManipulation();
 
+            Repository readFile = new Repository();
+            Console.WriteLine(readFile.EachWorker());
+
 /*            Console.WriteLine(work1.StrWrite());
-            Console.WriteLine(work1.ShowData());*/
-            Console.WriteLine(work1.DeleteWorker());
+            Console.WriteLine(work1.ShowData());*//*
+            Console.WriteLine(work1.DeleteWorker());*/
         }
     }
 }
