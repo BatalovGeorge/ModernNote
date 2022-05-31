@@ -15,7 +15,7 @@ namespace ModernNote
         {
             Console.WriteLine("Введите имя файла: ");
             SetPath = Console.ReadLine();
-            bool exist = File.Exists($@"{GetPath}.txt") ? true : false;
+            bool exist = File.Exists(GetPath) ? true : false;
            
             return exist;
         }
@@ -32,11 +32,12 @@ namespace ModernNote
                     string name = Console.ReadLine();
                     Console.WriteLine("Введите Город :");
                     string city = Console.ReadLine();
-
+                    
                     var worker = new Worker(id, name, city);
 
                     sW.WriteLine(worker.Print());
 
+                    id++;
                     Console.WriteLine("Продолжить д/н");
                     key = Console.ReadKey(true).KeyChar;
                 } while (char.ToLower(key) == 'д');
@@ -48,10 +49,29 @@ namespace ModernNote
             int n = 0;
             if (FileExist()==true)
             {
-                RecordInFileData(n);
+                RecordInFileData(ID());
             }
-            else { File.Create($@"{GetPath}.txt"); RecordInFileData(n+999); }
+            else 
+            {
+                Console.WriteLine($"файл не существует, {GetPath} будет создан атоматически ");
+                StreamWriter sR = new StreamWriter(GetPath);
+                sR.Close();
+                RecordInFileData(n + 1);
+            }
+            
             return null;
+        }
+
+        public int ID()
+        {
+            using(StreamReader sR =new StreamReader($"{GetPath}"))
+            {
+                string text = sR.ReadToEnd();
+                string[] split = text.Split(';');
+                return (split.Length+1)/4;
+                sR.Close();
+            }
+            
         }
 
     }

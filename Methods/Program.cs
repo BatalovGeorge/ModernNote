@@ -11,9 +11,15 @@ namespace ModernNote
 
         public static void Main(string[] args)
         {
-            WorkerManipulation work1 = new WorkerManipulation();
+            /*            AddOrDeleteWorker work1 = new AddOrDeleteWorker();
+            *//*            Repository rep1 = new Repository();
 
-            Console.WriteLine(work1.CheckFile());
+                        WorkerManipulation worker = new WorkerManipulation();
+                        worker.CheckFile();
+            *//*
+                        Console.WriteLine(work1.ShowDBToConsole());*/
+            Menu menu = new Menu();
+            menu.ShowMenu();
 
         }
     }

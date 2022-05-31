@@ -34,7 +34,7 @@ namespace ModernNote
         }
         public string Print()
         {
-            return $"Номер: {Id};Имя: {Name};Город: {City};Дата: {Date.ToShortDateString()};" ;
+            return $"Номер: {Id};Имя: {Name};Город: {City};Дата: {Date.ToShortDateString()};\n-----";
         }
 
 
