@@ -10,16 +10,10 @@ namespace ModernNote
     {
 
         public static void Main(string[] args)
+        
         {
-            /*            AddOrDeleteWorker work1 = new AddOrDeleteWorker();
-            *//*            Repository rep1 = new Repository();
-
-                        WorkerManipulation worker = new WorkerManipulation();
-                        worker.CheckFile();
-            *//*
-                        Console.WriteLine(work1.ShowDBToConsole());*/
             Menu menu = new Menu();
-            menu.ShowMenu();
+            menu.MenuList();
 
         }
     }

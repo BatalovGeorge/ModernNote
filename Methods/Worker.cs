@@ -17,6 +17,13 @@ namespace ModernNote
         public DateTime Date { get => date; set => date = DateTime.Now; }
         public int Id { get => id; set => id = value; }
 
+        public Worker(int id, string Name, string City, DateTime Date)
+        {
+            this.id = id;
+            this.name = Name;
+            this.city = City;
+            this.date = Date;
+        }
         public Worker(int id, string Name, string City)
         {
             this.id = id;
@@ -34,7 +41,7 @@ namespace ModernNote
         }
         public string Print()
         {
-            return $"Номер: {Id};Имя: {Name};Город: {City};Дата: {Date.ToShortDateString()};\n-----";
+            return $"{this.Id};{this.Name};{this.City};{Date.ToShortDateString()};";
         }
 
 
