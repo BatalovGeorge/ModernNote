@@ -10,6 +10,7 @@ namespace ModernNote
     {
         private CreateDB DataBase;
         private Repository Repository;
+
         
         public void MenuList()
         {
@@ -17,7 +18,13 @@ namespace ModernNote
             bool repeatMenu = true;
             while (repeatMenu)
             {
-                Console.WriteLine("1 - создание файла;\n2 - чтение файла;\n3 - редактирование файла;\n4 - вывод отдельного сотрудника;\n5-test \nq - Выход");
+                Console.WriteLine(
+                    "1 - создание файла;" +
+                    "\n2 - чтение файла;" +
+                    "\n3 - редактирование файла;" +
+                    "\n4 - вывод отдельного сотрудника;" +
+                    "\n5 - сортировка по датам; " +
+                    "\nq - Выход");
                 string key = Console.ReadLine();
                 
 
@@ -25,9 +32,6 @@ namespace ModernNote
                 {
 
                     case "1":
-/*                        Console.WriteLine("Введите имя файла:");
-                        string input = Console.ReadLine();*/
-                        
                         if (File.Exists(input))
                         {
                             Console.Write($"Файл {input} уже существует. Редактировать файл ? д/н");
@@ -51,34 +55,27 @@ namespace ModernNote
                             continue;
                         }
 
-                        return;
                     case "2":
-/*                        Console.Write("Введите имя файла:");*/
-/*                        input = Console.ReadLine();*/
+
                         Repository = new Repository(input);
                         Repository.Load();
                         Repository.PrintDbToConsole();
                         continue;
 
                     case "3":
-/*                        Console.WriteLine("Введите имя файла:");
-                        input = Console.ReadLine();
                         Repository = new Repository(input);
-                        Repository.ShowConcreteWorker();
-*/
-                        return;
+                        Repository.RedactWorker();
+                        continue;
 
                     case "4":
-/*                        Console.Write("Введите имя файла:");*/
-/*                        input = Console.ReadLine();*/
                         Repository = new Repository(input);
                         Repository.ShowConcreteWorker();
-                        Console.WriteLine("----------");
                         continue;
 
                     case "5":
                         Repository = new Repository(input);
-                        Repository.Sort();
+                        Repository.SortByDates();
+                        /*Repository.ReverseDates();*/
                         continue;
 
                     case "q":

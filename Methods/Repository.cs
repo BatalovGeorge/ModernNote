@@ -45,6 +45,37 @@ namespace ModernNote
             }
         }
 
+        public void RedactWorker()
+        {
+            Load();
+
+            PrintDbToConsole();
+
+            Console.Write("Введите номер записи: ");
+
+
+            uint input = Convert.ToUInt32(Console.ReadLine());
+            input -= 1;
+            if(input <= workers.Length)
+            {
+                Console.WriteLine("Введите имя: ");
+                workers[input].Name = Console.ReadLine();
+                Console.WriteLine("Введите город: ");
+                workers[input].City = Console.ReadLine();
+                workers[input].Date = DateTime.Now;
+                
+                using(StreamWriter sw = new StreamWriter(this.path))
+                {
+                    for (int i = 0; i < workers.Length; i++)
+                    {
+                         sw.WriteLine(workers[i].Print());
+                    }
+                    
+                }
+            }
+            else { Console.WriteLine($"запись под номером {input} отсутствует"); }
+
+        }
 
         public void Add(Worker ConcreteWorker)
         {
@@ -53,28 +84,40 @@ namespace ModernNote
             this.index++;
         }
 
-        public void Sort()
+        public void ReverseDates()
+        {
+            Load();
+
+            Array.Reverse(workers);
+
+            PrintDbToConsole();
+        }
+
+        public void SortByDates()
         {
             Load();
             Console.WriteLine("введи дату начала просмотра");
             int firstDay = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("введите конечную дату просмотра");
-            int secondDay = Convert.ToInt32(Console.ReadLine());
+            uint secondDay = Convert.ToUInt32(Console.ReadLine());
 
-            for (int i = 0; i < workers.Length; i++)
+
+            if(firstDay < secondDay && firstDay<31 && secondDay<31)
             {
-                for (int j = firstDay; j <= secondDay; j++)
+                for (int i = 0; i < workers.Length; i++)
                 {
-                    if (this.workers[i].Date == new DateTime(2022, 05, j))
+                    for (int j = firstDay; j <= secondDay; j++)
                     {
-                       Console.WriteLine(this.workers[i].Print());
+                        if (this.workers[i].Date == new DateTime(2022, 06, j))
+                        {
+                            Console.WriteLine(this.workers[i].Print());
+                        }
                     }
                 }
-                    
             }
+            else { Console.WriteLine("Введена некорректная дата"); }
             
         }
-
 
         public void Load()
         {
