@@ -8,7 +8,6 @@ namespace ModernNote
 {
     struct CreateDB
     {
-        private string path;
         private Worker Worker;
 
         public void WorkerDB(int id, string path)
@@ -36,22 +35,19 @@ namespace ModernNote
         {
             using (StreamReader sr = new StreamReader(path))
             {
-                string text = sr.ReadToEnd();
-                string[] split = text.Split("\r\n");
-                return (split.Length);
+                string[] split = sr.ReadToEnd().Split(";");
+                return ((split.Length-1)/4);
             }
-
         }
 
         public void Load(string path)
         {
             if (File.Exists(path))
             {
-                WorkerDB(ID(path), path);
+                WorkerDB(ID(path)+1, path);
             }
             else { WorkerDB(1, path); }
         }
-
 
         public void AddData(string path, string text)
         {
@@ -60,9 +56,7 @@ namespace ModernNote
                 sw.WriteLine(text);
             }
         }
-
-       
-        }
-
     }
+
+}
 

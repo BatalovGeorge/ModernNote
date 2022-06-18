@@ -10,72 +10,85 @@ namespace ModernNote
     {
         private CreateDB DataBase;
         private Repository Repository;
-
-        
+        private string path;
+        public Menu(string path)
+        {
+            this.path = "data";
+            this.Repository = new Repository(path);
+            this.DataBase = new CreateDB();
+        }
         public void MenuList()
         {
-            string input = "data";
+            Repository.Load();
+
             bool repeatMenu = true;
             while (repeatMenu)
             {
                 Console.WriteLine(
-                    "1 - создание файла;" +
-                    "\n2 - чтение файла;" +
+                    "1 - создание файла; " +
+                    "\n2 - чтение файла; " +
                     "\n3 - редактирование файла;" +
-                    "\n4 - вывод отдельного сотрудника;" +
-                    "\n5 - сортировка по датам; " +
-                    "\nq - Выход");
+                    "\n4 - вывод отдельного сотрудника; " +
+                    "\n5 - сортировка; " +
+                    "\n6 - удаление сотрудника; " +
+                    "\ns - сохранение изменений; " +
+                    "\nq - Выход ");
                 string key = Console.ReadLine();
+
                 
 
                 switch (key)
                 {
-
+                    
                     case "1":
-                        if (File.Exists(input))
+                        if (File.Exists(this.path))
                         {
-                            Console.Write($"Файл {input} уже существует. Редактировать файл ? д/н");
+                            Console.Write($"Файл {this.path} уже существует. Редактировать файл ? д/н");
                             key = Console.ReadLine();
                             if (key == "д")
                             {
                                 Console.WriteLine("переход в файл для редактирования");
-                                DataBase.Load(input);
+                                DataBase.Load(this.path);
 
                                 continue;
                             }
                             else
                             {
-                                DataBase.Load(input);
+                                DataBase.Load(this.path);
                                 continue;
                             }
                         }
                         else
                         {
-                            DataBase.Load(input);
+                            DataBase.Load(this.path);
                             continue;
                         }
 
                     case "2":
-
-                        Repository = new Repository(input);
-                        Repository.Load();
                         Repository.PrintDbToConsole();
                         continue;
 
                     case "3":
-                        Repository = new Repository(input);
                         Repository.RedactWorker();
                         continue;
 
                     case "4":
-                        Repository = new Repository(input);
                         Repository.ShowConcreteWorker();
                         continue;
 
                     case "5":
-                        Repository = new Repository(input);
-                        Repository.SortByDates();
-                        /*Repository.ReverseDates();*/
+                        Repository.SortByInputDates();
+                        Console.WriteLine(new string('-',15));
+                        Console.ReadKey();
+                        Repository.ReverseDates();
+                        continue;
+
+                    case "6":
+                        Repository.Delete();
+                        Repository.PrintDbToConsole();
+                        continue;
+                    case "s":
+                        Repository.SaveChanges();
                         continue;
 
                     case "q":
